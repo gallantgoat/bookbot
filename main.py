@@ -1,12 +1,22 @@
 def main():
     # "user" inputs
     book_path = "books/frankenstein.txt"
-    book = book_text(book_path)
-    word_num = word_count(book)
-    print(word_num)
-    #tests
-    characters = char_count(book)
-    print(characters)
+    book_string = book_text(book_path)
+    word_num = word_count(book_string)
+    characters = char_count(book_string)
+    characters_sorted = characters_to_sort(characters)
+    print(f"--- Starting book report of {book_path}---")
+    print(f"The book containes {word_num} words")
+    print()
+
+    for char in characters_sorted:
+        if not char["char"].isalpha():
+            continue
+        print(f"The '{char['char']}' character was found {char['num']} times")
+
+    print("--- Report Ending ---")
+    
+
 
 # takes file location of book and reads it back as one giant string
 def book_text(path):
@@ -18,7 +28,7 @@ def word_count(book):
     words = book.split()
     return(len(words))
 
-# counts the individual time a character appears in the string
+# counts the individual time a character appears in the string, returns a dictionary
 def char_count(book):
     char_dict = {}
     chars_lower = book.lower()
@@ -29,7 +39,17 @@ def char_count(book):
         else:
             char_dict[char] = 1
     return char_dict
-    
+
+def sort_on(dict):
+    return dict["num"]
+# take dictionary of characters and return it as a sorted list
+def characters_to_sort(characters):
+    sorted_list = []
+    for char in characters:
+        sorted_list.append({"char": char, "num": characters[char]})
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
+        
 
 
 
