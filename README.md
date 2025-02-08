@@ -1,2 +1,2 @@
 # bookbot
-My first command-line project in Python that does static analysis on text files/novels.
+My first command-line application in Python that does static analysis on text files/novels.
